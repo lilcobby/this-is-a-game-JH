@@ -1,9 +1,11 @@
-// question buttons variables
+var opener1 = document.getElementById("opener");
 var quest1 = document.getElementById("one");
 var quest2 = document.getElementById("two");
 var quest3 = document.getElementById("three");
 var quest4 = document.getElementById("four");
 var questprompt = document.getElementById("question");
+// need our questions
+
 // timer functionality
 var timeEl = document.querySelector(".timer");
 var secondsLeft = 120;
@@ -25,6 +27,9 @@ function setTime() {
 // start button starts timer and adds list element text with buttons.
 var startButton = document.querySelector(".start-button");
 startButton.addEventListener("click", function () {
+  //   removes start button and p
+  opener1 = opener1.textContent = "";
+  startButton.parentNode.remove();
   setTime();
   quest1 = quest1.innerHTML += "<button> this just got added </button>";
   quest2 = quest2.innerHTML += "<button> this has been added too </button>";
