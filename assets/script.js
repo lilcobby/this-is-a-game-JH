@@ -31,7 +31,6 @@ let score = 0;
 
 // timer functionality
 var timeEl = document.querySelector(".timer");
-// let secondsLeft = "";
 
 // start button starts timer and displays buttons.
 var startButton = document.querySelector(".start-button");
@@ -44,7 +43,7 @@ startButton.addEventListener("click", function () {
   qA.style.display = "block";
 });
 // timer functionality
-let counter = 5;
+let counter = 120;
 let timeout;
 
 function timedCount() {
@@ -53,6 +52,7 @@ function timedCount() {
   timeout = setTimeout(timedCount, 1000);
   if (counter < 0) {
     clearTimeout(timeout);
+    showScore();
   }
 }
 
@@ -111,12 +111,13 @@ function selectAnswer(e) {
   nextButton.style.display = "block";
 }
 
-// show score
+// show score and remove button
 function showScore() {
   resetState();
-  questionElement.innerHTML = "you scored x out of y";
-  nextButton.innerHTML = "play again";
-  nextButton.style.display = "block";
+  questionElement.innerHTML = score + " out of 10";
+  nextButton.remove();
+
+  // nextButton.style.display = "block";
 }
 
 function handleNextButton() {
@@ -125,6 +126,7 @@ function handleNextButton() {
     showQuestion();
   } else {
     showScore();
+    clearTimeout(timeout);
   }
 }
 // next button function
@@ -137,13 +139,3 @@ nextButton.addEventListener("click", () => {
 });
 
 startQuiz();
-
-// // start button starts timer and adds list element text with buttons.
-// var startButton = document.querySelector(".start-button");
-// startButton.addEventListener("click", function () {
-//   //   removes start button and p, calls function to populate the button answers with text and the question with text from first set of quest and ans.
-//   opener1 = opener1.textContent = "";
-//   startButton.parentNode.remove();
-// });
-
-// end start button
