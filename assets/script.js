@@ -1,23 +1,47 @@
 var opener1 = document.getElementById("opener");
-var quest1 = document.getElementById("one");
-var quest2 = document.getElementById("two");
-var quest3 = document.getElementById("three");
-var quest4 = document.getElementById("four");
-var questBox = document.getElementById("question");
-
-// our questions answers 1-10 as variable arrays
-var answerPrompt1 = [
-  "this is a question",
-  "this is also a quesion",
-  "final question",
-  "jk this is final question",
+// two questions for now from youtube vid https://www.youtube.com/watch?v=PBcqGxrr9g8&ab_channel=GreatStack I couldnt make my idea work so i need a base
+const questions = [
+  {
+    question: "text for question 1",
+    answers: [
+      { text: "one", correct: false },
+      { text: "two", correct: false },
+      { text: "three", correct: true },
+      { text: "four", correct: false },
+    ],
+  },
+  {
+    question: "text for question 2",
+    answers: [
+      { text: "one-1", correct: false },
+      { text: "two-2", correct: false },
+      { text: "three-3", correct: true },
+      { text: "four-4", correct: false },
+    ],
+  },
 ];
-// our question prompts 1-10
-var questionPrompt1 = ["this is me asking", "you a question", "about cats"];
+
+const questionElement = document.getElementById("question");
+const answerButtons = document.getElementById("answer-buttons");
+const nextButton = document.getElementById("next");
+const qA = document.getElementById("qA");
+
+let currentQuestionIndex = 0;
+let score = 0;
 
 // timer functionality
 var timeEl = document.querySelector(".timer");
 var secondsLeft = 120;
+
+// start button starts timer and displays buttons.
+var startButton = document.querySelector(".start-button");
+qA.style.display = "none";
+startButton.addEventListener("click", function () {
+  opener1 = opener1.textContent = "";
+  startButton.parentNode.remove();
+  setTime();
+  qA.style.display = "block";
+});
 
 function setTime() {
   // from 4-09-ins_timers-intervals
@@ -32,50 +56,92 @@ function setTime() {
     }
   }, 1000);
 }
-// end timer functionality
+// start quiz function
+function startQuiz() {
+  currentQuestionIndex = 0;
+  score = 0;
+  nextButton.innerHTML = "Next";
+  showQuestion();
+}
+// display question function
+function showQuestion() {
+  resetState();
+  let currentQuestion = questions[currentQuestionIndex];
+  let questionNo = currentQuestionIndex + 1;
+  questionElement.innerHTML = questionNo + ". " + currentQuestion.question;
 
-// start button starts timer and adds list element text with buttons.
-var startButton = document.querySelector(".start-button");
-startButton.addEventListener("click", function () {
-  //   removes start button and p, calls function to populate the button answers with text and the question with text from first set of quest and ans.
-  opener1 = opener1.textContent = "";
-  startButton.parentNode.remove();
-  setTime();
-  appendButton("one", answerPrompt1[0]);
-  appendButton("two", answerPrompt1[1]);
-  appendButton("three", answerPrompt1[2]);
-  appendButton("four", answerPrompt1[3]);
-  questBox.textContent = questionPrompt1[0];
-});
-
-// end start button
-// question 2
-
-// now we need each subsequent q/a with buttons that reduce time
-
-// function to create answer buttons and question prompts.
-function appendButton(q, r) {
-  buttonText = r;
-  button = document.createElement("button");
-  button.textContent = buttonText;
-
-  button.setAttribute("id", "answerButton");
-  button.setAttribute("type", "button");
-  document.getElementById(q).appendChild(button);
-
-  // gives the created button click functionality
-  button.addEventListener("click", function () {
-    document.getElementById("answerButton").innerHTML = "I hate this";
-
-    // document.getElementById("answerButton").textContent = answerPrompt1[1];
-    // document.getElementById("answerButton").textContent = answerPrompt1[2];
-    // document.getElementById("answerButton").textContent = answerPrompt1[1];
-    // document.getElementById("answerButton").textContent = answerPrompt1[0];
-    // appendButton("one", answerPrompt1[3]);
-    // appendButton("two", answerPrompt1[2]);
-    // appendButton("three", answerPrompt1[1]);
-    // appendButton("four", answerPrompt1[0]);
-    // questBox.textContent = questionPrompt1[1];
-    // console.log(answerButton);
+  currentQuestion.answers.forEach((answer) => {
+    const button = document.createElement("button");
+    button.innerHTML = answer.text;
+    button.classList.add("btn");
+    answerButtons.appendChild(button);
+    if (answer.correct) {
+      button.dataset.correct = answer.correct;
+    }
+    button.addEventListener("click", selectAnswer);
   });
 }
+
+function resetState() {
+  nextButton.style.display = "none";
+  while (answerButtons.firstChild) {
+    answerButtons.removeChild(answerButtons.firstChild);
+  }
+}
+
+function selectAnswer(e) {
+  const selectedBtn = e.target;
+  const isCorrect = selectedBtn.dataset.correct === "true";
+  if (isCorrect) {
+    selectedBtn.classList.add("correct");
+    score++;
+  } else {
+  }
+  selectedBtn.classList.add("incorrect");
+  Array.from(answerButtons.children).forEach((button) => {
+    if (button.dataset.correct === "true") {
+      button.classList.add("correct");
+    }
+    // maybe hide instead of diable
+    button.disabled = true;
+  });
+
+  nextButton.style.display = "block";
+}
+
+// show score
+function showScore() {
+  resetState();
+  questionElement.innerHTML = "you scored x out of y";
+  nextButton.innerHTML = "play again";
+  nextButton.style.display = "block";
+}
+
+function handleNextButton() {
+  currentQuestionIndex++;
+  if (currentQuestionIndex < questions.length) {
+    showQuestion();
+  } else {
+    showScore();
+  }
+}
+// next button function
+nextButton.addEventListener("click", () => {
+  if (currentQuestionIndex < questions.length) {
+    handleNextButton();
+  } else {
+    startQuiz();
+  }
+});
+
+startQuiz();
+
+// // start button starts timer and adds list element text with buttons.
+// var startButton = document.querySelector(".start-button");
+// startButton.addEventListener("click", function () {
+//   //   removes start button and p, calls function to populate the button answers with text and the question with text from first set of quest and ans.
+//   opener1 = opener1.textContent = "";
+//   startButton.parentNode.remove();
+// });
+
+// end start button
