@@ -31,31 +31,31 @@ let score = 0;
 
 // timer functionality
 var timeEl = document.querySelector(".timer");
-var secondsLeft = 120;
+// let secondsLeft = "";
 
 // start button starts timer and displays buttons.
 var startButton = document.querySelector(".start-button");
 qA.style.display = "none";
+
 startButton.addEventListener("click", function () {
   opener1 = opener1.textContent = "";
   startButton.parentNode.remove();
-  setTime();
+  timedCount();
   qA.style.display = "block";
 });
+// timer functionality
+let counter = 5;
+let timeout;
 
-function setTime() {
-  // from 4-09-ins_timers-intervals
-  var timeEl = document.querySelector(".timer");
-  var secondsLeft = 120;
-  var timerInterval = setInterval(function () {
-    secondsLeft--;
-    timeEl.textContent = secondsLeft;
-
-    if (secondsLeft === 0) {
-      clearInterval(timerInterval);
-    }
-  }, 1000);
+function timedCount() {
+  document.getElementById("timer").textContent = counter;
+  counter--;
+  timeout = setTimeout(timedCount, 1000);
+  if (counter < 0) {
+    clearTimeout(timeout);
+  }
 }
+
 // start quiz function
 function startQuiz() {
   currentQuestionIndex = 0;
@@ -92,10 +92,12 @@ function resetState() {
 function selectAnswer(e) {
   const selectedBtn = e.target;
   const isCorrect = selectedBtn.dataset.correct === "true";
+
   if (isCorrect) {
     selectedBtn.classList.add("correct");
     score++;
   } else {
+    counter -= 15;
   }
   selectedBtn.classList.add("incorrect");
   Array.from(answerButtons.children).forEach((button) => {
