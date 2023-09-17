@@ -30,7 +30,7 @@ let currentQuestionIndex = 0;
 let score = 0;
 
 // timer functionality
-var timeEl = document.querySelector(".timer");
+var timeEl = document.getElementById("timer");
 
 // start button starts timer and displays buttons.
 var startButton = document.querySelector(".start-button");
@@ -69,7 +69,7 @@ function showQuestion() {
   let currentQuestion = questions[currentQuestionIndex];
   let questionNo = currentQuestionIndex + 1;
   questionElement.innerHTML = questionNo + ". " + currentQuestion.question;
-
+  // display answers creates buttons with text that is equal to the current answer pool
   currentQuestion.answers.forEach((answer) => {
     const button = document.createElement("button");
     button.innerHTML = answer.text;
@@ -81,9 +81,10 @@ function showQuestion() {
     button.addEventListener("click", selectAnswer);
   });
 }
-
+// removes old questions
 function resetState() {
   nextButton.style.display = "none";
+
   while (answerButtons.firstChild) {
     answerButtons.removeChild(answerButtons.firstChild);
   }
@@ -114,6 +115,7 @@ function selectAnswer(e) {
 // show score and remove button
 function showScore() {
   resetState();
+
   questionElement.innerHTML = score + " out of 10";
   nextButton.remove();
 
@@ -127,6 +129,7 @@ function handleNextButton() {
   } else {
     showScore();
     clearTimeout(timeout);
+    timeEl.style.display = "none";
   }
 }
 // next button function
