@@ -18,7 +18,7 @@ var questionPrompt1 = ["this is me asking", "you a question", "about cats"];
 // timer functionality
 var timeEl = document.querySelector(".timer");
 var secondsLeft = 120;
-var t = "hello";
+
 function setTime() {
   // from 4-09-ins_timers-intervals
   var timeEl = document.querySelector(".timer");
@@ -49,15 +49,33 @@ startButton.addEventListener("click", function () {
 });
 
 // end start button
+// question 2
 
 // now we need each subsequent q/a with buttons that reduce time
 
 // function to create answer buttons and question prompts.
 function appendButton(q, r) {
-  let buttonText = r;
-  let button = document.createElement("button");
+  buttonText = r;
+  button = document.createElement("button");
   button.textContent = buttonText;
 
+  button.setAttribute("id", "answerButton");
   button.setAttribute("type", "button");
   document.getElementById(q).appendChild(button);
+
+  // gives the created button click functionality
+  button.addEventListener("click", function () {
+    document.getElementById("answerButton").innerHTML = "I hate this";
+
+    // document.getElementById("answerButton").textContent = answerPrompt1[1];
+    // document.getElementById("answerButton").textContent = answerPrompt1[2];
+    // document.getElementById("answerButton").textContent = answerPrompt1[1];
+    // document.getElementById("answerButton").textContent = answerPrompt1[0];
+    // appendButton("one", answerPrompt1[3]);
+    // appendButton("two", answerPrompt1[2]);
+    // appendButton("three", answerPrompt1[1]);
+    // appendButton("four", answerPrompt1[0]);
+    // questBox.textContent = questionPrompt1[1];
+    // console.log(answerButton);
+  });
 }
