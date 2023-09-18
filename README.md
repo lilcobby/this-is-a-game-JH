@@ -16,7 +16,9 @@ I enjoyed learning about time functions and passing data to functions with param
 here is a picture of the website and links. 
 
 
+![Alt text](image.png)
 
+https://github.com/lilcobby/this-is-a-game-JH
 
-
+https://lilcobby.github.io/this-is-a-game-JH/
 
