@@ -223,6 +223,7 @@ resetButton.addEventListener("click", function () {
 });
 // button to log high score with textbox that retains info to be saved
 // i know this is messy but i'm in a rush to the airport will fix later or resubmit
+// help from 04-22 in class work
 document.getElementById("finalTouches").style.display = "none";
 var nickName = localStorage.getItem("highScore");
 document.getElementById("memoryScore").innerHTML = nickName;
