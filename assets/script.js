@@ -130,6 +130,7 @@ function handleNextButton() {
     showScore();
     clearTimeout(timeout);
     timeEl.style.display = "none";
+    document.getElementById("finalTouches").style.display = "block";
   }
 }
 // next button function
@@ -139,6 +140,22 @@ nextButton.addEventListener("click", () => {
   } else {
     startQuiz();
   }
+});
+// button to reset page
+var resetButton = document.getElementById("resetPage");
+resetButton.addEventListener("click", function () {
+  location.reload();
+});
+// button to log high score with textbox that retains info to be saved
+
+document.getElementById("finalTouches").style.display = "none";
+var nickName = localStorage.getItem("highScore");
+document.getElementById("memoryScore").innerHTML = nickName;
+var loggingButton = document.getElementById("logHsbutton");
+loggingButton.addEventListener("click", function (event) {
+  event.preventDefault();
+  var nickName = document.querySelector("#highScore").value;
+  localStorage.setItem("highScore", nickName + " " + score);
 });
 
 startQuiz();
