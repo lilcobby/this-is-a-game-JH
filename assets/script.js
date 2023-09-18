@@ -1,5 +1,6 @@
 var opener1 = document.getElementById("opener");
 // two questions for now from youtube vid https://www.youtube.com/watch?v=PBcqGxrr9g8&ab_channel=GreatStack I couldnt make my idea work so i need a base
+// all my questions below
 const questions = [
   {
     question: "text for question 1",
@@ -17,6 +18,78 @@ const questions = [
       { text: "two-2", correct: false },
       { text: "three-3", correct: true },
       { text: "four-4", correct: false },
+    ],
+  },
+  {
+    question: "text for question 1",
+    answers: [
+      { text: "one", correct: false },
+      { text: "two", correct: false },
+      { text: "three", correct: true },
+      { text: "four", correct: false },
+    ],
+  },
+  {
+    question: "text for question 1",
+    answers: [
+      { text: "one", correct: false },
+      { text: "two", correct: false },
+      { text: "three", correct: true },
+      { text: "four", correct: false },
+    ],
+  },
+  {
+    question: "text for question 1",
+    answers: [
+      { text: "one", correct: false },
+      { text: "two", correct: false },
+      { text: "three", correct: true },
+      { text: "four", correct: false },
+    ],
+  },
+  {
+    question: "text for question 1",
+    answers: [
+      { text: "one", correct: false },
+      { text: "two", correct: false },
+      { text: "three", correct: true },
+      { text: "four", correct: false },
+    ],
+  },
+  {
+    question: "text for question 1",
+    answers: [
+      { text: "one", correct: false },
+      { text: "two", correct: false },
+      { text: "three", correct: true },
+      { text: "four", correct: false },
+    ],
+  },
+  {
+    question: "text for question 1",
+    answers: [
+      { text: "one", correct: false },
+      { text: "two", correct: false },
+      { text: "three", correct: true },
+      { text: "four", correct: false },
+    ],
+  },
+  {
+    question: "text for question 1",
+    answers: [
+      { text: "one", correct: false },
+      { text: "two", correct: false },
+      { text: "three", correct: true },
+      { text: "four", correct: false },
+    ],
+  },
+  {
+    question: "text for question 1",
+    answers: [
+      { text: "one", correct: false },
+      { text: "two", correct: false },
+      { text: "three", correct: true },
+      { text: "four", correct: false },
     ],
   },
 ];
@@ -118,6 +191,8 @@ function showScore() {
 
   questionElement.innerHTML = score + " out of 10";
   nextButton.remove();
+  timeEl.style.display = "none";
+  document.getElementById("finalTouches").style.display = "block";
 
   // nextButton.style.display = "block";
 }
@@ -147,7 +222,7 @@ resetButton.addEventListener("click", function () {
   location.reload();
 });
 // button to log high score with textbox that retains info to be saved
-
+// i know this is messy but i'm in a rush to the airport will fix later or resubmit
 document.getElementById("finalTouches").style.display = "none";
 var nickName = localStorage.getItem("highScore");
 document.getElementById("memoryScore").innerHTML = nickName;
