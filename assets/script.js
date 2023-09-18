@@ -6,14 +6,14 @@ const questions = [
   {
     question: "inside which HTML elemend do we put javascript?",
     answers: [
-      { text: "<js>", correct: false },
-      { text: "<scripting>", correct: false },
-      { text: "<javascript>", correct: false },
+      { text: "js", correct: false },
+      { text: "scripting", correct: false },
+      { text: "javascript", correct: false },
       { text: "script", correct: true },
     ],
   },
   {
-    question: "what is the correct HTML syntax to change <p id ='demo'> this is a demonstration</p> ",
+    question: "what is the correct HTML syntax to change p id ='demo'> this is a demonstration</p> ",
     answers: [
       { text: "document.getElement('p').innerHTML='hello world'", correct: false },
       { text: "#demo.innerHTML='hello world'", correct: false },
@@ -24,10 +24,10 @@ const questions = [
   {
     question: "where is the correct place to insert a Java script?",
     answers: [
-      { text: "<body>", correct: true },
-      { text: "<title>", correct: false },
-      { text: "<footer>", correct: false },
-      { text: "<div>", correct: false },
+      { text: "body", correct: true },
+      { text: "title", correct: false },
+      { text: "footer", correct: false },
+      { text: "div", correct: false },
     ],
   },
   {
@@ -54,7 +54,7 @@ const questions = [
       { text: "'this is a comment'", correct: false },
       { text: "(this is a comment)", correct: false },
       { text: "//this is a comment", correct: true },
-      { text: "<!--this is a comment-->", correct: false },
+      { text: "!--this is a comment--", correct: false },
     ],
   },
   {
